@@ -1,14 +1,14 @@
-# gif-resize
+# gif-resizer
 >a simple package to resize gifs while maintaining aspect ratio
 
 # Install
 ```
-$ npm install gif-resize
+$ npm install gif-resizer
 ```
 
 # Usage
 ```
-const gifResize = require("gif-resize");
+const gifResize = require("gif-resizer");
 const fs = require("fs");
 
 // you can also use a buffer
