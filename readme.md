@@ -18,3 +18,8 @@ gifResize("tenor.gif", { width: 400, height: 390 }).then(file => {
     });
 });
 ```
+## Options 
+
+* width: number
+* height: number
+* stretch: boolean

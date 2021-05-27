@@ -15,9 +15,14 @@ function gifResize(data, ops) {
 
     const gif = new Promise(async (res, rej) => {
 
+        if (!ops.width && !ops.height) res(data)
+
         const buffer = Buffer.isBuffer(data) ? data : fs.readFileSync(data)
 
         const dimensions = imageSize(buffer)
+
+        if (!ops.height || typeof ops.height !== "number") ops.height = dimensions.height
+        if (!ops.width || typeof ops.width !== "number") ops.height = dimensions.width
 
         if (dimensions.type !== "gif") res(data)
 
