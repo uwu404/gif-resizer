@@ -7,22 +7,17 @@ const imageSize = require("image-size");
 
 /**
  * @param {Buffer|string} data 
- * @param {{ width: number, height: number, stretch: boolean }} ops 
+ * @param {{ width: number, height: number, stretch: boolean, colors: number }} ops 
  * @returns {Promise<Buffer>}
  */
 
-function gifResize(data, ops) {
+function gifResize(data, ops={}) {
 
     const gif = new Promise(async (res, rej) => {
-
-        if (!ops.width && !ops.height) res(data)
 
         const buffer = Buffer.isBuffer(data) ? data : fs.readFileSync(data)
 
         const dimensions = imageSize(buffer)
-
-        if (!ops.height || typeof ops.height !== "number") ops.height = dimensions.height
-        if (!ops.width || typeof ops.width !== "number") ops.height = dimensions.width
 
         if (dimensions.type !== "gif") res(data)
 
@@ -46,9 +41,17 @@ function gifResize(data, ops) {
 
         const size = dimensions.width > dimensions.height ? infoW() : infoH()
 
-        const args = ["--resize", `${ops.width}x${ops.height}`]
-        if (!ops.stretch) args.unshift('--crop', size)
+        const args = ['--no-warnings', '--no-app-extensions']
+        if (!ops.stretch && ops.height && ops.width) args.push('--crop', size) 
+        if (typeof ops.colors === "number") args.push(`--colors=${ops.colors}`)
 
+        if (ops.height && ops.width) {
+            args.push("--resize", `${ops.width}x${ops.height}`)
+        } else if (ops.height) {
+            args.push(`--resize-height=${ops.height}`)
+        } else if (ops.width) {
+            args.push(`--resize-width=${ops.width}`)
+        }
 
         const { stdout } = await execa(gifsicle, args, {
             encoding: null,

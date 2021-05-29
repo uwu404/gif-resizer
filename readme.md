@@ -23,3 +23,4 @@ gifResize("tenor.gif", { width: 400, height: 390 }).then(file => {
 * width: number
 * height: number
 * stretch: boolean
+* colors: number
