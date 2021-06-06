@@ -13,9 +13,7 @@ const fs = require("fs");
 
 // you can also use a buffer
 gifResize("tenor.gif", { width: 400, height: 390 }).then(file => {
-    fs.writeFileSync("success.gif", file, "binary", (err) => {
-        if (err) console.log(err);
-    });
+    fs.writeFileSync("success.gif", file)
 });
 ```
 ## Options 
