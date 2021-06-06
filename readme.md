@@ -7,7 +7,7 @@ $ npm install gif-resizer
 ```
 
 # Usage
-```
+```js
 const gifResize = require("gif-resizer");
 const fs = require("fs");
 
@@ -24,3 +24,4 @@ gifResize("tenor.gif", { width: 400, height: 390 }).then(file => {
 * height: number
 * stretch: boolean
 * colors: number
+* scale: number

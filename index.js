@@ -7,7 +7,7 @@ const imageSize = require("image-size");
 
 /**
  * @param {Buffer|string} data 
- * @param {{ width: number, height: number, stretch: boolean, colors: number }} ops 
+ * @param {{ width: number, height: number, stretch: boolean, colors: number, scale: number }} ops 
  * @returns {Promise<Buffer>}
  */
 
@@ -51,6 +51,10 @@ function gifResize(data, ops={}) {
             args.push(`--resize-height=${ops.height}`)
         } else if (ops.width) {
             args.push(`--resize-width=${ops.width}`)
+        }
+
+        if (typeof ops.scale === "number") {
+            args.push(`--scale=${ops.scale / 100}`)
         }
 
         const { stdout } = await execa(gifsicle, args, {
