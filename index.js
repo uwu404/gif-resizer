@@ -7,7 +7,7 @@ const imageSize = require("image-size");
 
 /**
  * @param {Buffer|string} data 
- * @param {{ width: number, height: number, stretch: boolean, colors: number, scale: number }} ops 
+ * @param {{ width: number, height: number, stretch: boolean, colors: number, scale: number, optimize: number }} ops 
  * @returns {Promise<Buffer>}
  */
 
@@ -52,6 +52,8 @@ function gifResize(data, ops={}) {
         } else if (ops.width) {
             args.push(`--resize-width=${ops.width}`)
         }
+
+        if (typeof ops.optimize === "number" && ops.optimize > 0 && ops.optimize < 4) args.push(`--optimize=${ops.optimize}`)
 
         if (typeof ops.scale === "number") {
             args.push(`--scale=${ops.scale / 100}`)
