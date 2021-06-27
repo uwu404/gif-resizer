@@ -19,7 +19,7 @@ function gifResize(data, ops={}) {
 
         const dimensions = imageSize(buffer)
 
-        if (dimensions.type !== "gif") res(data)
+        if (dimensions.type !== "gif") return res(data)
 
         const infoH = () => {
             const mesure = dimensions.width / dimensions.height
