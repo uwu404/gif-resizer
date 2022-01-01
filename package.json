@@ -1,6 +1,6 @@
 {
   "name": "gif-resizer",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "a package for resizing gifs while keeping aspect ratio",
   "main": "index.js",
   "homepage": "https://github.com/uwu404/gif-resizer#readme",
