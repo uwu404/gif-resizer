@@ -1,5 +1,5 @@
 'use strict';
-const gifsicle = require("gifsicle");
+const dynamicallyImportGifsicle = import("gifsicle");
 const execa = require("execa");
 const fs = require("fs")
 const imageSize = require("image-size");
@@ -58,8 +58,8 @@ function gifResize(data, ops={}) {
         if (typeof ops.scale === "number") args.push(`--scale=${ops.scale / 100}`)
         if (typeof ops.lossy === "number") args.push(`--lossy=${ops.lossy}`)
 
-
-        const { stdout } = await execa(gifsicle, args, {
+        const gifsicle = await dynamicallyImportGifsicle
+        const { stdout } = await execa(gifsicle.default, args, {
             encoding: null,
             maxBuffer: Infinity,
             input: buffer
